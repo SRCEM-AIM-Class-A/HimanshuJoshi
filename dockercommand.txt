@@ -1,0 +1,188 @@
+Microsoft Windows [Version 10.0.19045.5371]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32>docker pull ubuntu
+Using default tag: latest
+latest: Pulling from library/ubuntu
+de44b265507a: Pull complete
+Digest: sha256:80dd3c3b9c6cecb9f1667e9290b3bc61b78c2678c02cbdae5f0fea92cc6734ab
+Status: Downloaded newer image for ubuntu:latest
+docker.io/library/ubuntu:latest
+
+C:\Windows\system32>docker run -it ubuntu
+root@d9ed5d563d36:/# apt-get update
+Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Get:3 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1035 kB]
+Get:4 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Get:6 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [740 kB]
+Get:7 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [724 kB]
+Get:8 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [15.5 kB]
+Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1808 kB]
+Get:10 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+Get:11 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+Get:13 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [19.7 kB]
+Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [995 kB]
+Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1269 kB]
+Get:16 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [739 kB]
+Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [15.1 kB]
+Fetched 27.8 MB in 17s (1663 kB/s)
+Reading package lists... Done
+root@d9ed5d563d36:/#
+C:\Windows\system32>
+
+
+Microsoft Windows [Version 10.0.19045.5371]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32>docker container ls
+CONTAINER ID   IMAGE     COMMAND       CREATED              STATUS              PORTS     NAMES
+d9ed5d563d36   ubuntu    "/bin/bash"   About a minute ago   Up About a minute             competent_booth
+
+C:\Windows\system32>docker image
+
+Usage:  docker image COMMAND
+
+Manage images
+
+Commands:
+  build       Build an image from a Dockerfile
+  history     Show the history of an image
+  import      Import the contents from a tarball to create a filesystem image
+  inspect     Display detailed information on one or more images
+  load        Load an image from a tar archive or STDIN
+  ls          List images
+  prune       Remove unused images
+  pull        Download an image from a registry
+  push        Upload an image to a registry
+  rm          Remove one or more images
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+
+Run 'docker image COMMAND --help' for more information on a command.
+
+C:\Windows\system32>docker image ls
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+ubuntu       latest    b1d9df8ab815   2 months ago   78.1MB
+
+C:\Windows\system32>docker image rm
+"docker image rm" requires at least 1 argument.
+See 'docker image rm --help'.
+
+Usage:  docker image rm [OPTIONS] IMAGE [IMAGE...]
+
+Remove one or more images
+
+C:\Windows\system32>docker image save
+"docker image save" requires at least 1 argument.
+See 'docker image save --help'.
+
+Usage:  docker image save [OPTIONS] IMAGE [IMAGE...]
+
+Save one or more images to a tar archive (streamed to STDOUT by default)
+
+C:\Windows\system32>docker image save b1d9df8ab815 | gzip > b1d9df8ab815.tar.gz
+'gzip' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Windows\system32>docker save -o ubuntu.tar/ubuntu:latest
+"docker save" requires at least 1 argument.
+See 'docker save --help'.
+
+Usage:  docker save [OPTIONS] IMAGE [IMAGE...]
+
+Save one or more images to a tar archive (streamed to STDOUT by default)
+
+C:\Windows\system32>docker save -o ubuntu.tar ubuntu:latest
+
+C:\Windows\system32>docker stop d9ed5d563d36
+d9ed5d563d36
+
+C:\Windows\system32>docker rm d9ed5d563d36
+d9ed5d563d36
+
+C:\Windows\system32>docker rmi ubuntu:latest
+Untagged: ubuntu:latest
+Untagged: ubuntu@sha256:80dd3c3b9c6cecb9f1667e9290b3bc61b78c2678c02cbdae5f0fea92cc6734ab
+Deleted: sha256:b1d9df8ab81559494794e522b380878cf9ba82d4c1fb67293bcf931c3aa69ae4
+Deleted: sha256:687d50f2f6a697da02e05f2b2b9cb05c1d551f37c404ebe55fdec44b0ae8aa5c
+
+C:\Windows\system32>docker image inspect ubuntu
+[]
+Error response from daemon: No such image: ubuntu:latest
+
+C:\Windows\system32>docker load -i ubuntu.tar
+687d50f2f6a6: Loading layer [==================================================>]  80.63MB/80.63MB
+Loaded image: ubuntu:latest
+
+C:\Windows\system32>
+C:\Windows\system32>docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+ubuntu       latest    b1d9df8ab815   2 months ago   78.1MB
+
+C:\Windows\system32>
+C:\Windows\system32>docker image inspect ubuntu
+[
+    {
+        "Id": "sha256:b1d9df8ab81559494794e522b380878cf9ba82d4c1fb67293bcf931c3aa69ae4",
+        "RepoTags": [
+            "ubuntu:latest"
+        ],
+        "RepoDigests": [],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2024-11-19T17:29:25.973758549Z",
+        "DockerVersion": "24.0.7",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "/bin/bash"
+            ],
+            "Image": "sha256:3ba7f9a61d88dd09bb6ac9166cec39891772edc997c4c1da55e50a27f2647e48",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {
+                "org.opencontainers.image.ref.name": "ubuntu",
+                "org.opencontainers.image.version": "24.04"
+            }
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 78120830,
+        "GraphDriver": {
+            "Data": {
+                "MergedDir": "/var/lib/docker/overlay2/6346c4febd9674aafff0a4cab1a4ad2722b21361bc8723bba8be1c9f567fed70/merged",
+                "UpperDir": "/var/lib/docker/overlay2/6346c4febd9674aafff0a4cab1a4ad2722b21361bc8723bba8be1c9f567fed70/diff",
+                "WorkDir": "/var/lib/docker/overlay2/6346c4febd9674aafff0a4cab1a4ad2722b21361bc8723bba8be1c9f567fed70/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:687d50f2f6a697da02e05f2b2b9cb05c1d551f37c404ebe55fdec44b0ae8aa5c"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
+
+C:\Windows\system32>
